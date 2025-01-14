@@ -309,6 +309,262 @@
       </tags>
   </entry>
   <entry>
+    <title>详解请求头信息</title>
+    <url>/2025/01/14/%E8%AF%A6%E8%A7%A3%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<p>参考<a href="https://blog.csdn.net/weixin_37846886/article/details/141033907">详解request headers（一篇讲完常见字段）</a></p>
+<h1 id="0x01定义"><a href="#0x01定义" class="headerlink" title="0x01定义"></a>0x01定义</h1><p>HTTP请求头部（HTTP Request Headers）：HTTP协议中的一部分，用于在客户端和服务器之间传递附加信息。这些头部字段提供了关于请求、客户端环境、或请求的上下文的信息。</p>
+<p>请求头是键值对的形式，每个key对应填写相应的内容（内容可能包括多个取值，取多个值时，以“;”分隔）。<br>通过bp抓包可以得到或者更改请求头信息，比如以下就是通过bp抓访问百度包的请求头</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="variable constant_">GET</span> / <span class="variable constant_">HTTP</span>/<span class="number">1.1</span></span><br><span class="line"><span class="title class_">Host</span>: www.baidu.com</span><br><span class="line"><span class="title class_">Cookie</span>: <span class="variable constant_">BAIDUID</span>=<span class="variable constant_">D915327BE37405BA6581E6C24AC9305D</span><span class="symbol">:FG=</span><span class="number">1</span>; sensorsdata2015jssdkcross=%7B%22distinct_id%<span class="number">22</span>%3A%<span class="number">22380654666</span>%<span class="number">22</span>%2C%22first_id%<span class="number">22</span>%3A%221935df1042d1e5a-0a8a9fc02-4c657b58-<span class="number">1821369</span>-1935df1042eeb5%<span class="number">22</span>%2C%22props%7D%2C%<span class="number">22</span>%24device_id%<span class="number">22</span>%3A%221935df1042d1e5a-00faf5a8a9fc02-4c657b58-<span class="number">1821369</span>-1935df1042eeb5%<span class="number">22</span>%7D; <span class="variable constant_">BDUSS</span>=1NNWkM5Vkt2b3U2Q2dVazBSY043dTBpVW82fnQ1bzJnOTJ-<span class="title class_">TEM2RHVSczdLbnRuRVFBQUFBJCQAAAAAAAAAAAEAAABE9JvK0</span>~fH373cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADudU2c7nVNnN; </span><br><span class="line"><span class="title class_">Upgrade</span>-<span class="title class_">Insecure</span>-<span class="title class_">Requests</span>: <span class="number">1</span></span><br><span class="line"><span class="title class_">User</span>-<span class="title class_">Agent</span>: <span class="title class_">Mozilla</span>/<span class="number">5.0</span> (<span class="title class_">Windows</span> <span class="variable constant_">NT</span> <span class="number">10.0</span>; <span class="title class_">Win64</span>; x64) <span class="title class_">AppleWebKit</span>/<span class="number">537.36</span> (<span class="variable constant_">KHTML</span>, like <span class="title class_">Gecko</span>) <span class="title class_">Chrome</span>/<span class="number">131.0</span>.<span class="number">0.0</span> <span class="title class_">Safari</span>/<span class="number">537.36</span> <span class="title class_">Edg</span>/<span class="number">131.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="title class_">Accept</span>: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/avif,image/webp,image/apng,*<span class="regexp">/*;q=0.8,application/signed</span>-exchange;v=b3;q=<span class="number">0.7</span></span><br><span class="line"><span class="title class_">Sec</span>-<span class="title class_">Ch</span>-<span class="title class_">Ua</span>: <span class="string">&quot;Microsoft Edge&quot;</span>;v=<span class="string">&quot;131&quot;</span>, <span class="string">&quot;Chromium&quot;</span>;v=<span class="string">&quot;131&quot;</span>, <span class="string">&quot;Not_A Brand&quot;</span>;v=<span class="string">&quot;24&quot;</span></span><br><span class="line"><span class="title class_">Sec</span>-<span class="title class_">Ch</span>-<span class="title class_">Ua</span>-<span class="title class_">Mobile</span>: <span class="string">?0</span></span><br><span class="line"><span class="title class_">Sec</span>-<span class="title class_">Ch</span>-<span class="title class_">Ua</span>-<span class="title class_">Platform</span>: <span class="string">&quot;Windows&quot;</span></span><br><span class="line"><span class="title class_">Sec</span>-<span class="title class_">Fetch</span>-<span class="title class_">Site</span>: none</span><br><span class="line"><span class="title class_">Sec</span>-<span class="title class_">Fetch</span>-<span class="title class_">Mode</span>: navigate</span><br><span class="line"><span class="title class_">Sec</span>-<span class="title class_">Fetch</span>-<span class="title class_">User</span>: <span class="string">?1</span></span><br><span class="line"><span class="title class_">Sec</span>-<span class="title class_">Fetch</span>-<span class="title class_">Dest</span>: document</span><br><span class="line"><span class="title class_">Accept</span>-<span class="title class_">Encoding</span>: gzip, deflate, br</span><br><span class="line"><span class="title class_">Accept</span>-<span class="title class_">Language</span>: zh-<span class="variable constant_">CN</span>,zh;q=<span class="number">0.9</span>,en;q=<span class="number">0.8</span>,en-<span class="variable constant_">GB</span>;q=<span class="number">0.7</span>,en-<span class="variable constant_">US</span>;q=<span class="number">0.6</span></span><br><span class="line"><span class="title class_">Priority</span>: u=<span class="number">0</span>, i</span><br><span class="line"><span class="title class_">Connection</span>: keep-alive</span><br></pre></td></tr></table></figure>
+
+<h1 id="0x02常见请求头"><a href="#0x02常见请求头" class="headerlink" title="0x02常见请求头"></a>0x02常见请求头</h1><table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th>含义</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Accept</td>
+<td>指定客户端可以接收的内容类型</td>
+<td>Accept:application&#x2F;json, text&#x2F;plain, &#x2F;</td>
+</tr>
+<tr>
+<td align="left">Accept-Charset</td>
+<td>浏览器能够接受的字符编码集</td>
+<td>Accept-Charset: iso-8859-5</td>
+</tr>
+<tr>
+<td align="left">Accept-Encoding</td>
+<td>指定浏览器能够支持的web服务器返回内容压缩编码类型</td>
+<td>Accept-Encoding: gzip, deflate, br</td>
+</tr>
+<tr>
+<td align="left">Accept-Language</td>
+<td>浏览器可接受的语言</td>
+<td>Accept-Language: zh-CN,zh;q&#x3D;0.9</td>
+</tr>
+<tr>
+<td align="left">Accept-Ranges</td>
+<td>能够请求网页实体的一个或者多个子范围字段</td>
+<td>Accept-Ranges: bytes</td>
+</tr>
+<tr>
+<td align="left"><strong>Authorization</strong></td>
+<td><strong>客户端认证信息</strong></td>
+<td>Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</td>
+</tr>
+<tr>
+<td align="left">Cache-Control</td>
+<td>指定请求和响应遵循的缓存机制</td>
+<td>Cache-Control: max-age&#x3D;0</td>
+</tr>
+<tr>
+<td align="left"><strong>Connection</strong></td>
+<td><strong>表示是否须要持久链接,HTTP 1.1默认进行持久链接</strong></td>
+<td>Connection: keep-alive</td>
+</tr>
+<tr>
+<td align="left"><strong>Cookie</strong></td>
+<td><strong>HTTP请求发送时，会把保存在该请求域名下的全部cookie值一块儿发送给web服务器</strong></td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><strong>Content-Length</strong></td>
+<td><strong>请求的内容长度</strong></td>
+<td>Content-Length: 348</td>
+</tr>
+<tr>
+<td align="left"><strong>Content-Type</strong></td>
+<td><strong>请求的与实体对应的MIME信息</strong></td>
+<td>Content-Type: application&#x2F;json;charset&#x3D;UTF-8</td>
+</tr>
+<tr>
+<td align="left">Date</td>
+<td>请求发送的日期和时间</td>
+<td>Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td align="left">Expect</td>
+<td>请求的特定的服务器行为</td>
+<td>Expect: 100-continue</td>
+</tr>
+<tr>
+<td align="left">From</td>
+<td>发出请求的用户的Email</td>
+<td>From: <a href="mailto:&#x75;&#115;&#101;&#x72;&#x40;&#101;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x75;&#115;&#101;&#x72;&#x40;&#101;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a></td>
+</tr>
+<tr>
+<td align="left"><strong>Host</strong></td>
+<td><strong>指定请求的服务器的域名和端口号</strong></td>
+<td>Host: <a href="http://www.baidu.com/">www.baidu.com</a></td>
+</tr>
+<tr>
+<td align="left">If-Match</td>
+<td>只有请求内容与实体相匹配才有效</td>
+<td>If-Match: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td align="left">If-Modified-Since</td>
+<td>若是请求的部分在指定时间以后被修改则请求成功，未被修改则返回304代码</td>
+<td>If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td align="left">If-None-Match</td>
+<td>若是内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变</td>
+<td>If-None-Match: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td align="left">If-Range</td>
+<td>若是实体未改变，服务器发送客户端丢失的部分，不然发送整个实体。参数也为Etag</td>
+<td>If-Range: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td align="left">If-Unmodified-Since</td>
+<td>只在实体在指定时间以后未被修改才请求成功</td>
+<td>If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td align="left">Max-Forwards</td>
+<td>限制信息经过代理和网关传送的时间</td>
+<td>Max-Forwards: 10</td>
+</tr>
+<tr>
+<td align="left">Pragma</td>
+<td>用来包含实现特定的指令</td>
+<td>Pragma: no-cache</td>
+</tr>
+<tr>
+<td align="left">Proxy-Authorization</td>
+<td>链接到代理的受权证书</td>
+<td>Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</td>
+</tr>
+<tr>
+<td align="left">Range</td>
+<td>只请求实体的一部分，指定范围</td>
+<td>Range: bytes&#x3D;500-999</td>
+</tr>
+<tr>
+<td align="left"><strong>Referer</strong></td>
+<td><strong>先前网页的地址，当前请求网页紧随其后,即来路</strong></td>
+<td>Referer: <a href="http://www.baidu.com/">www.baidu.com</a></td>
+</tr>
+<tr>
+<td align="left">TE</td>
+<td>客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息</td>
+<td>TE: trailers,deflate;q&#x3D;0.5</td>
+</tr>
+<tr>
+<td align="left">Upgrade</td>
+<td>向服务器指定某种传输协议以便服务器进行转换（若是支持）</td>
+<td>Upgrade: HTTP&#x2F;2.0, SHTTP&#x2F;1.3, IRC&#x2F;6.9, RTA&#x2F;x11</td>
+</tr>
+<tr>
+<td align="left"><strong>User-Agent(UA)</strong></td>
+<td><strong>User-Agent的内容包含发出请求的用户信息</strong></td>
+<td>User-Agent: Mozilla&#x2F;5.0 (Linux; X11)</td>
+</tr>
+<tr>
+<td align="left">Via</td>
+<td>通知中间网关或代理服务器地址，通讯协议</td>
+<td>Via: 1.0 fred, 1.1 nowhere.com (Apache&#x2F;1.1)</td>
+</tr>
+<tr>
+<td align="left">Warning</td>
+<td>关于消息实体的警告信息</td>
+<td>Warn: 199 Miscellaneous warning</td>
+</tr>
+<tr>
+<td align="left">X-Forwarded-For</td>
+<td>用来说明从哪里来的，一般用来内网伪装</td>
+<td>X-Forwarded-For: 127.0.0.1</td>
+</tr>
+</tbody></table>
+<h1 id="0x03详解"><a href="#0x03详解" class="headerlink" title="0x03详解"></a>0x03详解</h1><h2 id="1-Host-请求主机名-见表格"><a href="#1-Host-请求主机名-见表格" class="headerlink" title="1.Host:请求主机名(见表格)"></a>1.Host:请求主机名(见表格)</h2><h2 id="2-Referer-来源url-见表格"><a href="#2-Referer-来源url-见表格" class="headerlink" title="2.Referer:来源url(见表格)"></a>2.Referer:来源url(见表格)</h2><h2 id="3-Authorization-身份信息"><a href="#3-Authorization-身份信息" class="headerlink" title="3.Authorization:身份信息"></a>3.Authorization:身份信息</h2><p>向服务器提供身份验证信息。要求登录权限的接口，在请求时使用此字段。</p>
+<p>用户登录后，服务器返回token，此后调用其他接口添加Authorization字段，字段value通常格式为“Bearer {toke}”或“Basic {authentication}”。例如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Content-Type内容格式"><a href="#4-Content-Type内容格式" class="headerlink" title="4.Content-Type内容格式"></a>4.Content-Type内容格式</h2><p>是一种 MIME 类型，指定在POST或PUT请求中发送的数据的类型，用于告知服务器请求体的数据类型（如表单数据、JSON数据等）。</p>
+<p>Content-Type 字段的值通常遵循 type&#x2F;subtype 的格式，由三部分组成：主类型type、子类型subtype、可选参数parameter。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">格式：type/subtype[:parameter]（主类型/子类型[;可选参数]）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>type : 主类型，任意的字符串，如text，如果是*号代表所有。</p>
+</li>
+<li><p>subtype : 子类型，任意的字符串，如html，如果是*号代表所有，用“&#x2F;”与主类型隔开；是更具体的格式。</p>
+</li>
+<li><p>parameter：可选参数，如charset，boundary等。</p>
+</li>
+</ul>
+<h2 id="5-Content-Length内容长度"><a href="#5-Content-Length内容长度" class="headerlink" title="5.Content-Length内容长度"></a>5.Content-Length内容长度</h2><p>指定POST或PUT请求中发送的数据的长度。</p>
+<p>Content-Length如果存在并且有效，必须和消息内容的传输长度完全一致，否则就会导致异常。以下为三种情况</p>
+<table>
+<thead>
+<tr>
+<th>Content-Length和实际长度关系</th>
+<th>现象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Content-Length &gt; 实际长度</td>
+<td>服务端&#x2F;客户端读取到消息结尾后，会等待下一个字节，自然会无响应直到超时</td>
+</tr>
+<tr>
+<td>Content-Length &#x3D;&#x3D; 实际长度</td>
+<td>服务器正常接收完整数据</td>
+</tr>
+<tr>
+<td>Content-Length &lt; 实际长度</td>
+<td>截取指定长度数据</td>
+</tr>
+</tbody></table>
+<p>如果不确定Content-Length的值，使用：</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Transfer</span>-<span class="title class_">Encoding</span><span class="symbol">:chunked</span></span><br></pre></td></tr></table></figure>
+
+<p>该字段表示分块传输数据，设置这个字段会自动产生两个效果：</p>
+<p>① Content-Length 字段被忽略；</p>
+<p>② 基于长连接持续推送动态内容。</p>
+<h2 id="6-Connection连接类型"><a href="#6-Connection连接类型" class="headerlink" title="6.Connection连接类型"></a>6.Connection连接类型</h2><p>客户端与服务连接类型。</p>
+<p><strong>3种取值：</strong>keep-alive（长链接接）、close（短链接）、upgrade（升级协议）。</p>
+<p>HTTP&#x2F;1.0协议默认值为close；</p>
+<p>HTTP&#x2F;1.1协议默认值为keep-alive。</p>
+<p><strong>举例：</strong></p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Connection</span><span class="symbol">:keep-alive</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-User-Agent客户端信息"><a href="#7-User-Agent客户端信息" class="headerlink" title="7.User-Agent客户端信息"></a>7.User-Agent客户端信息</h2><p>发送请求的浏览器或其他客户端软件的信息。可以包括浏览器的名称和版本、操作系统等信息。</p>
+<h2 id="8-Accept接收数据格式"><a href="#8-Accept接收数据格式" class="headerlink" title="8.Accept接收数据格式"></a>8.Accept接收数据格式</h2><p>指定客户端接受的数据类型，取值基本同Content-Type。</p>
+<h2 id="9-cookies浏览器缓存"><a href="#9-cookies浏览器缓存" class="headerlink" title="9.cookies浏览器缓存"></a>9.cookies浏览器缓存</h2><p>cookie是一门客户端技术，一般是由服务器生成返回给浏览器客户端来保存的，并且cookie是以键值对的形式保存在浏览器客户端的，每一个cookie都会有名称，值，过期时间</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">格式  <span class="symbol">cookies:</span> key1=value1;key2=value2…</span><br></pre></td></tr></table></figure>
+
+<p>这里还要补充一个知识点，就是cookie中的session伪造</p>
+<h3 id="补充-session伪造"><a href="#补充-session伪造" class="headerlink" title="补充:session伪造"></a>补充:session伪造</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>flask中的session是存储在客户端的cookie中，flask仅对数据进行签名，所以session的全部内容都可以在客户端读取，flask通过一个secret_key密钥对数据 进行签名来防止session被篡改。</p>
+<h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><p>得到session信息 并且 知道flask的签名的SECRET_KEY</p>
+<h4 id="session结构"><a href="#session结构" class="headerlink" title="session结构"></a>session结构</h4><p>flask session通常是由三部分组成，中间通过<code>.</code>来进行分割，第一部分就是我们json形式的数据通过base64加密后的结果，第二部分是时间戳，也算是签名算法，第三部分就是我们的密钥签名</p>
+<ul>
+<li><p>时间戳：用来告诉服务端数据最后一次更新的时间，超过31天的会话，将会过期，变为无效会话；</p>
+</li>
+<li><p>签名：是利用<code>Hmac</code>算法，将session数据和时间戳加上<code>secret_key</code>加密而成的，用来保证数据没有被修改。</p>
+</li>
+</ul>
+<h4 id="解密脚本"><a href="#解密脚本" class="headerlink" title="解密脚本"></a>解密脚本</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</span><br><span class="line"><span class="keyword">from</span> flask.sessions <span class="keyword">import</span> session_json_serializer</span><br><span class="line"><span class="keyword">from</span> itsdangerous <span class="keyword">import</span> base64_decode</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decryption</span>(<span class="params">payload</span>):</span><br><span class="line">    payload, sig = payload.rsplit(<span class="string">b&#x27;.&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">    payload, timestamp = payload.rsplit(<span class="string">b&#x27;.&#x27;</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    decompress = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> payload.startswith(<span class="string">b&#x27;.&#x27;</span>):</span><br><span class="line">        payload = payload[<span class="number">1</span>:]</span><br><span class="line">        decompress = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        payload = base64_decode(payload)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&#x27;Could not base64 decode the payload because of &#x27;</span></span><br><span class="line">                        <span class="string">&#x27;an exception&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> decompress:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            payload = zlib.decompress(payload)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">&#x27;Could not zlib decompress the payload before &#x27;</span></span><br><span class="line">                            <span class="string">&#x27;decoding the payload&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> session_json_serializer.loads(payload)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(decryption(<span class="string">&quot;待解密的session值&quot;</span>.encode()))<span class="comment">#把需要加密的flasksession的值换一下就行</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通过flask-unsign进行加解密"><a href="#通过flask-unsign进行加解密" class="headerlink" title="通过flask_unsign进行加解密"></a>通过flask_unsign进行加解密</h4><p>python安装flask-unsign库</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install flask-unsign</span><br></pre></td></tr></table></figure>
+
+<p>先对cookie进行解密</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">flask-unsign --decode --cookie <span class="string">&#x27;待解密内容&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>签名加密</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">flask-unsign --sign --cookie <span class="string">&quot;待加密内容(json数据)&quot;</span> --secret <span class="string">&#x27;密钥&#x27;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>-基础</category>
+      </categories>
+      <tags>
+        <tag>-基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ctfshow-web入门-sql注入</title>
     <url>/2024/12/03/ctfshow-sql%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="无过滤注入"><a href="#无过滤注入" class="headerlink" title="无过滤注入"></a>无过滤注入</h1><h2 id="web171"><a href="#web171" class="headerlink" title="web171"></a>web171</h2><p>简单的查询语句，结合上方sql查询语句用-1’ or  username &#x3D; ‘flag查询flag</p>
