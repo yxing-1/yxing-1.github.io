@@ -35,41 +35,6 @@
       </tags>
   </entry>
   <entry>
-    <title>linux常见指令</title>
-    <url>/2024/12/02/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="1-ls-列出当前目录所有文件"><a href="#1-ls-列出当前目录所有文件" class="headerlink" title="1.ls:列出当前目录所有文件"></a>1.ls:列出当前目录所有文件</h1><h2 id="ls-l-列出文件及属性"><a href="#ls-l-列出文件及属性" class="headerlink" title="ls -l:列出文件及属性"></a>ls -l:列出文件及属性</h2><p><strong>第一列</strong></p>
-<p>第1个字母为d表示为目录，为-表示为普通文件</p>
-<p>2-4个字母：rwx表示read,write,执行，表示文件所有者权限</p>
-<p>5-7个字母:表示该组内其他用户权限</p>
-<p>8-10个字母:表示除该组其他用户权限</p>
-<p><strong>第五列</strong></p>
-<p>表示文件大小</p>
-<p><strong>第六七八列</strong></p>
-<p>表示修改时间</p>
-<p><img src="/../img/%E5%8D%9A%E5%AE%A2/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/1.png"></p>
-<h2 id="ls-a-查看隐藏文件"><a href="#ls-a-查看隐藏文件" class="headerlink" title="ls -a:查看隐藏文件"></a>ls -a:查看隐藏文件</h2><p>第一个字符为.表示为隐藏文件</p>
-<h2 id="ls-la-列出文件及属性-包括隐藏文件"><a href="#ls-la-列出文件及属性-包括隐藏文件" class="headerlink" title="ls -la:列出文件及属性(包括隐藏文件)"></a>ls -la:列出文件及属性(包括隐藏文件)</h2><p><strong>注:大部分命令行以ll代表ls -l的缩写</strong></p>
-<h1 id="2-cd-进入一个目录-格式cd-目录名"><a href="#2-cd-进入一个目录-格式cd-目录名" class="headerlink" title="2.cd:进入一个目录(格式cd 目录名)"></a><strong>2.cd:进入一个目录(格式cd 目录名)</strong></h1><h2 id="cd-回到上一层目录"><a href="#cd-回到上一层目录" class="headerlink" title="cd ..:回到上一层目录"></a>cd ..:回到上一层目录</h2><h2 id="cd-进入当前目录"><a href="#cd-进入当前目录" class="headerlink" title="cd .:进入当前目录"></a>cd .:进入当前目录</h2><h2 id="cd-进入上上层目录"><a href="#cd-进入上上层目录" class="headerlink" title="cd ..&#x2F;..:进入上上层目录"></a>cd ..&#x2F;..:进入上上层目录</h2><h2 id="cd-进入上一次进入的目录"><a href="#cd-进入上一次进入的目录" class="headerlink" title="cd -:进入上一次进入的目录"></a>cd -:进入上一次进入的目录</h2><h1 id="3-pwd-打印当前路径"><a href="#3-pwd-打印当前路径" class="headerlink" title="3.pwd:打印当前路径"></a><strong>3.pwd:打印当前路径</strong></h1><h1 id="4-cat-tail-head-查看文件内容"><a href="#4-cat-tail-head-查看文件内容" class="headerlink" title="4.cat&#x2F;tail&#x2F;head:查看文件内容"></a><strong>4.cat&#x2F;tail&#x2F;head</strong>:查看文件内容</h1><h2 id="cat-文件名-查看当前文件内容"><a href="#cat-文件名-查看当前文件内容" class="headerlink" title="cat 文件名:查看当前文件内容"></a><strong>cat 文件名:查看当前文件内容</strong></h2><p><strong>快捷键:</strong></p>
-<p><strong>Tab键:<strong>对目录中名字唯一的文件，如README，输入R后</strong>按Tab键自动补齐</strong></p>
-<p><strong>上下键:自动输入上一个或下一个使用的命令</strong></p>
-<h3 id="head-文件名-只看文件开头内容"><a href="#head-文件名-只看文件开头内容" class="headerlink" title="head 文件名:只看文件开头内容"></a><strong>head 文件名:只看文件开头内容</strong></h3><h3 id="head-–lines-x-文件名-只看文件开头前x行内容"><a href="#head-–lines-x-文件名-只看文件开头前x行内容" class="headerlink" title="head –lines&#x3D;x 文件名:只看文件开头前x行内容"></a><strong>head –lines&#x3D;x 文件名:只看文件开头前x行内容</strong></h3><h3 id="tail-文件名-只看文件结尾内容"><a href="#tail-文件名-只看文件结尾内容" class="headerlink" title="tail 文件名:只看文件结尾内容"></a><strong>tail 文件名:只看文件结尾内容</strong></h3><h3 id="tail-–lines-x-文件名-只看文件结尾前x行内容"><a href="#tail-–lines-x-文件名-只看文件结尾前x行内容" class="headerlink" title="tail –lines&#x3D;x 文件名:只看文件结尾前x行内容"></a><strong>tail –lines&#x3D;x 文件名:只看文件结尾前x行内容</strong></h3><h1 id="5-less-more-查看全文"><a href="#5-less-more-查看全文" class="headerlink" title="5.less&#x2F;more:查看全文"></a><strong>5.less&#x2F;more</strong>:查看全文</h1><h3 id="less-文件名-查看全文"><a href="#less-文件名-查看全文" class="headerlink" title="**less 文件名:查看全文"></a>**less 文件名:查看全文</h3><p><strong>按q退出,可前后滚动</strong></p>
-<h3 id="more-文件名-查看全文"><a href="#more-文件名-查看全文" class="headerlink" title="more 文件名:查看全文"></a><strong>more 文件名:查看全文</strong></h3><p><strong>按q退出，Linux只可向下滚动</strong></p>
-<h1 id="6-nano-vim-进入文本编辑器"><a href="#6-nano-vim-进入文本编辑器" class="headerlink" title="6.nano&#x2F;vim:进入文本编辑器"></a><strong>6.nano&#x2F;vim</strong>:进入文本编辑器</h1><p><strong>(注:按i进入insert模式才可进行修改,按esc键退出insert模式,:q!强制退出编辑器,:wq编辑后退出编辑器)</strong></p>
-<h1 id="7-file-查看文件属性-格式file-文件名"><a href="#7-file-查看文件属性-格式file-文件名" class="headerlink" title="7.file:查看文件属性(格式file 文件名)"></a><strong>7.file:查看文件属性(格式file 文件名)</strong></h1><h1 id="8-where-查看文件路径-格式where-文件名"><a href="#8-where-查看文件路径-格式where-文件名" class="headerlink" title="8.where:查看文件路径(格式where 文件名)"></a><strong>8.where:查看文件路径(格式where 文件名)</strong></h1><h1 id="9-echo-打印-格式-echo-打印内容"><a href="#9-echo-打印-格式-echo-打印内容" class="headerlink" title="9.echo:打印(格式 echo 打印内容)"></a><strong>9.echo:打印(格式 echo 打印内容)</strong></h1><h1 id="10-Shell-programming-variables"><a href="#10-Shell-programming-variables" class="headerlink" title="10.Shell programming:variables"></a><strong>10.Shell programming:variables</strong></h1><p><strong>可定义变量(eg h&#x3D;”hello”)回车后echo $h就可打印hello</strong></p>
-<p><strong>注:可用{}包裹变量防止变量误用</strong></p>
-<h1 id="11-Shell-programming-for-loop-没有撤销，注意"><a href="#11-Shell-programming-for-loop-没有撤销，注意" class="headerlink" title="11.Shell programming:for loop(没有撤销，注意)"></a><strong>11.Shell programming:for loop</strong><strong>(没有撤销，注意)</strong></h1><p><strong>格式:for 变量名 in 文件名(注:x*表示x开头的文件,x??表示x后有两个字符的文件)</strong></p>
-<p><strong>for &gt; do</strong></p>
-<p><strong>for&gt; echo $ff(注:${ff#x}表示除去打印中前面的x(掐头)若将#换为%即除去后面(去尾))</strong></p>
-<p><strong>for&gt; done</strong></p>
-<h1 id="12-mv-修改文件名字-格式mv-改前名-改后名"><a href="#12-mv-修改文件名字-格式mv-改前名-改后名" class="headerlink" title="12.mv:修改文件名字(格式mv 改前名 改后名)"></a><strong>12.mv:修改文件名字(格式mv 改前名 改后名)</strong></h1>]]></content>
-      <categories>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>sql注入基础</title>
     <url>/2024/12/09/sql%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="0×01原理"><a href="#0×01原理" class="headerlink" title="0×01原理"></a>0×01原理</h1><p>攻击者在进行数据库查询时恶意构造查询语句，使得查询语句能够得到任意攻击者想要的信息(永远不要相信用户的输入)</p>
@@ -289,7 +254,7 @@
 <p><img src="/../img/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019/image-20250114010145776.png" alt="image-20250114010145776"></p>
 <h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><p>打开页面没什么信息，在源码中找到Secret.php页面</p>
 <p><img src="/../img/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019/image-20250114191647807.png" alt="image-20250114191647807"></p>
-<p>访问提示不是来自<code>https://Sycsecret.buuoj.cn</code>，即涉及到referer伪造，参考<a href="">详解请求头信息</a></p>
+<p>访问提示不是来自<code>https://Sycsecret.buuoj.cn</code>，即涉及到referer伪造，参考<a href="https://yxing-1.github.io/2025/01/14/%E8%AF%A6%E8%A7%A3%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/">详解请求头信息</a></p>
 <p><img src="/../img/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019/image-20250114191714414.png" alt="image-20250114191714414"></p>
 <p>抓包在bp重发器中伪造referer后如下</p>
 <p><img src="/../img/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019/image-20250114192249528.png" alt="image-20250114192249528"></p>
@@ -302,10 +267,46 @@
 <p><img src="/../img/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019/image-20250114193503087.png" alt="image-20250114193503087"></p>
 ]]></content>
       <categories>
-        <category>-赛题复现</category>
+        <category>赛题复现</category>
       </categories>
       <tags>
-        <tag>-比赛 -复现</tag>
+        <tag>比赛</tag>
+        <tag>复现</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux常见指令</title>
+    <url>/2024/12/02/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="1-ls-列出当前目录所有文件"><a href="#1-ls-列出当前目录所有文件" class="headerlink" title="1.ls:列出当前目录所有文件"></a>1.ls:列出当前目录所有文件</h1><h2 id="ls-l-列出文件及属性"><a href="#ls-l-列出文件及属性" class="headerlink" title="ls -l:列出文件及属性"></a>ls -l:列出文件及属性</h2><p><strong>第一列</strong></p>
+<p>第1个字母为d表示为目录，为-表示为普通文件</p>
+<p>2-4个字母：rwx表示read,write,执行，表示文件所有者权限</p>
+<p>5-7个字母:表示该组内其他用户权限</p>
+<p>8-10个字母:表示除该组其他用户权限</p>
+<p><strong>第五列</strong></p>
+<p>表示文件大小</p>
+<p><strong>第六七八列</strong></p>
+<p>表示修改时间</p>
+<p><img src="/../img/%E5%8D%9A%E5%AE%A2/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/1.png"></p>
+<h2 id="ls-a-查看隐藏文件"><a href="#ls-a-查看隐藏文件" class="headerlink" title="ls -a:查看隐藏文件"></a>ls -a:查看隐藏文件</h2><p>第一个字符为.表示为隐藏文件</p>
+<h2 id="ls-la-列出文件及属性-包括隐藏文件"><a href="#ls-la-列出文件及属性-包括隐藏文件" class="headerlink" title="ls -la:列出文件及属性(包括隐藏文件)"></a>ls -la:列出文件及属性(包括隐藏文件)</h2><p><strong>注:大部分命令行以ll代表ls -l的缩写</strong></p>
+<h1 id="2-cd-进入一个目录-格式cd-目录名"><a href="#2-cd-进入一个目录-格式cd-目录名" class="headerlink" title="2.cd:进入一个目录(格式cd 目录名)"></a><strong>2.cd:进入一个目录(格式cd 目录名)</strong></h1><h2 id="cd-回到上一层目录"><a href="#cd-回到上一层目录" class="headerlink" title="cd ..:回到上一层目录"></a>cd ..:回到上一层目录</h2><h2 id="cd-进入当前目录"><a href="#cd-进入当前目录" class="headerlink" title="cd .:进入当前目录"></a>cd .:进入当前目录</h2><h2 id="cd-进入上上层目录"><a href="#cd-进入上上层目录" class="headerlink" title="cd ..&#x2F;..:进入上上层目录"></a>cd ..&#x2F;..:进入上上层目录</h2><h2 id="cd-进入上一次进入的目录"><a href="#cd-进入上一次进入的目录" class="headerlink" title="cd -:进入上一次进入的目录"></a>cd -:进入上一次进入的目录</h2><h1 id="3-pwd-打印当前路径"><a href="#3-pwd-打印当前路径" class="headerlink" title="3.pwd:打印当前路径"></a><strong>3.pwd:打印当前路径</strong></h1><h1 id="4-cat-tail-head-查看文件内容"><a href="#4-cat-tail-head-查看文件内容" class="headerlink" title="4.cat&#x2F;tail&#x2F;head:查看文件内容"></a><strong>4.cat&#x2F;tail&#x2F;head</strong>:查看文件内容</h1><h2 id="cat-文件名-查看当前文件内容"><a href="#cat-文件名-查看当前文件内容" class="headerlink" title="cat 文件名:查看当前文件内容"></a><strong>cat 文件名:查看当前文件内容</strong></h2><p><strong>快捷键:</strong></p>
+<p><strong>Tab键:<strong>对目录中名字唯一的文件，如README，输入R后</strong>按Tab键自动补齐</strong></p>
+<p><strong>上下键:自动输入上一个或下一个使用的命令</strong></p>
+<h3 id="head-文件名-只看文件开头内容"><a href="#head-文件名-只看文件开头内容" class="headerlink" title="head 文件名:只看文件开头内容"></a><strong>head 文件名:只看文件开头内容</strong></h3><h3 id="head-–lines-x-文件名-只看文件开头前x行内容"><a href="#head-–lines-x-文件名-只看文件开头前x行内容" class="headerlink" title="head –lines&#x3D;x 文件名:只看文件开头前x行内容"></a><strong>head –lines&#x3D;x 文件名:只看文件开头前x行内容</strong></h3><h3 id="tail-文件名-只看文件结尾内容"><a href="#tail-文件名-只看文件结尾内容" class="headerlink" title="tail 文件名:只看文件结尾内容"></a><strong>tail 文件名:只看文件结尾内容</strong></h3><h3 id="tail-–lines-x-文件名-只看文件结尾前x行内容"><a href="#tail-–lines-x-文件名-只看文件结尾前x行内容" class="headerlink" title="tail –lines&#x3D;x 文件名:只看文件结尾前x行内容"></a><strong>tail –lines&#x3D;x 文件名:只看文件结尾前x行内容</strong></h3><h1 id="5-less-more-查看全文"><a href="#5-less-more-查看全文" class="headerlink" title="5.less&#x2F;more:查看全文"></a><strong>5.less&#x2F;more</strong>:查看全文</h1><h3 id="less-文件名-查看全文"><a href="#less-文件名-查看全文" class="headerlink" title="**less 文件名:查看全文"></a>**less 文件名:查看全文</h3><p><strong>按q退出,可前后滚动</strong></p>
+<h3 id="more-文件名-查看全文"><a href="#more-文件名-查看全文" class="headerlink" title="more 文件名:查看全文"></a><strong>more 文件名:查看全文</strong></h3><p><strong>按q退出，Linux只可向下滚动</strong></p>
+<h1 id="6-nano-vim-进入文本编辑器"><a href="#6-nano-vim-进入文本编辑器" class="headerlink" title="6.nano&#x2F;vim:进入文本编辑器"></a><strong>6.nano&#x2F;vim</strong>:进入文本编辑器</h1><p><strong>(注:按i进入insert模式才可进行修改,按esc键退出insert模式,:q!强制退出编辑器,:wq编辑后退出编辑器)</strong></p>
+<h1 id="7-file-查看文件属性-格式file-文件名"><a href="#7-file-查看文件属性-格式file-文件名" class="headerlink" title="7.file:查看文件属性(格式file 文件名)"></a><strong>7.file:查看文件属性(格式file 文件名)</strong></h1><h1 id="8-where-查看文件路径-格式where-文件名"><a href="#8-where-查看文件路径-格式where-文件名" class="headerlink" title="8.where:查看文件路径(格式where 文件名)"></a><strong>8.where:查看文件路径(格式where 文件名)</strong></h1><h1 id="9-echo-打印-格式-echo-打印内容"><a href="#9-echo-打印-格式-echo-打印内容" class="headerlink" title="9.echo:打印(格式 echo 打印内容)"></a><strong>9.echo:打印(格式 echo 打印内容)</strong></h1><h1 id="10-Shell-programming-variables"><a href="#10-Shell-programming-variables" class="headerlink" title="10.Shell programming:variables"></a><strong>10.Shell programming:variables</strong></h1><p><strong>可定义变量(eg h&#x3D;”hello”)回车后echo $h就可打印hello</strong></p>
+<p><strong>注:可用{}包裹变量防止变量误用</strong></p>
+<h1 id="11-Shell-programming-for-loop-没有撤销，注意"><a href="#11-Shell-programming-for-loop-没有撤销，注意" class="headerlink" title="11.Shell programming:for loop(没有撤销，注意)"></a><strong>11.Shell programming:for loop</strong><strong>(没有撤销，注意)</strong></h1><p><strong>格式:for 变量名 in 文件名(注:x*表示x开头的文件,x??表示x后有两个字符的文件)</strong></p>
+<p><strong>for &gt; do</strong></p>
+<p><strong>for&gt; echo $ff(注:${ff#x}表示除去打印中前面的x(掐头)若将#换为%即除去后面(去尾))</strong></p>
+<p><strong>for&gt; done</strong></p>
+<h1 id="12-mv-修改文件名字-格式mv-改前名-改后名"><a href="#12-mv-修改文件名字-格式mv-改前名-改后名" class="headerlink" title="12.mv:修改文件名字(格式mv 改前名 改后名)"></a><strong>12.mv:修改文件名字(格式mv 改前名 改后名)</strong></h1>]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -392,7 +393,7 @@
 <tr>
 <td align="left">From</td>
 <td>发出请求的用户的Email</td>
-<td>From: <a href="mailto:&#x75;&#115;&#101;&#x72;&#x40;&#101;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x75;&#115;&#101;&#x72;&#x40;&#101;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a></td>
+<td>From: <a href="mailto:&#x75;&#115;&#101;&#x72;&#x40;&#101;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#x75;&#115;&#101;&#x72;&#x40;&#101;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a></td>
 </tr>
 <tr>
 <td align="left"><strong>Host</strong></td>
@@ -558,10 +559,10 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">flask-unsign --sign --cookie <span class="string">&quot;待加密内容(json数据)&quot;</span> --secret <span class="string">&#x27;密钥&#x27;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>-基础</category>
+        <category>基础</category>
       </categories>
       <tags>
-        <tag>-基础</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
