@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>帕鲁杯-WP | Yxing</title><meta name="author" content="yxing"><meta name="copyright" content="yxing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="WEBCatBank逻辑漏洞，允许余额为负值，那么多注册几个账号后相互转账，到一百万时获得flag  palu&#123;0a2c13c6a72e4429a5ef89057f01ee16&#125; CatNet扫目录发现&#x2F;admin路由，提示本地访问，添加X-Forwarded-For:127.0.0.1，响应包中看到需要带上X-Internal-Auth:cateye-internal-000">
+<meta property="og:type" content="article">
+<meta property="og:title" content="帕鲁杯-WP">
+<meta property="og:url" content="http://yxing-1.github.io/2025/05/17/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/index.html">
+<meta property="og:site_name" content="Yxing">
+<meta property="og:description" content="WEBCatBank逻辑漏洞，允许余额为负值，那么多注册几个账号后相互转账，到一百万时获得flag  palu&#123;0a2c13c6a72e4429a5ef89057f01ee16&#125; CatNet扫目录发现&#x2F;admin路由，提示本地访问，添加X-Forwarded-For:127.0.0.1，响应包中看到需要带上X-Internal-Auth:cateye-internal-000">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yxing-1.github.io/img/fafa.png">
+<meta property="article:published_time" content="2025-05-16T23:45:31.000Z">
+<meta property="article:modified_time" content="2025-05-22T05:20:39.943Z">
+<meta property="article:author" content="yxing">
+<meta property="article:tag" content="比赛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yxing-1.github.io/img/fafa.png"><link rel="shortcut icon" href="/img/%E5%9B%BE%E6%A0%87.jpg"><link rel="canonical" href="http://yxing-1.github.io/2025/05/17/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '帕鲁杯-WP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/loading.gif" data-original="/img/%E9%BB%91.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-list"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/fafa.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/loading.gif" data-original="/img/%E5%9B%BE%E6%A0%87.jpg" alt="Logo"><span class="site-name">Yxing</span></a><a class="nav-page-title" href="/"><span class="site-name">帕鲁杯-WP</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-list"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">帕鲁杯-WP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-16T23:45:31.000Z" title="发表于 2025-05-17 07:45:31">2025-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-22T05:20:39.943Z" title="更新于 2025-05-22 13:20:39">2025-05-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B5%9B%E9%A2%98wp/">赛题wp</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="CatBank"><a href="#CatBank" class="headerlink" title="CatBank"></a>CatBank</h2><p>逻辑漏洞，允许余额为负值，那么多注册几个账号后相互转账，到一百万时获得flag</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517100024369.png" alt="image-20250517100024369"></p>
+<p><code>palu&#123;0a2c13c6a72e4429a5ef89057f01ee16&#125;</code></p>
+<h2 id="CatNet"><a href="#CatNet" class="headerlink" title="CatNet"></a>CatNet</h2><p>扫目录发现<code>/admin</code>路由，提示本地访问，添加<code>X-Forwarded-For:127.0.0.1</code>，响应包中看到需要带上<code>X-Internal-Auth:cateye-internal-000</code>去访问<code>/flag</code>，但是错误，爆破数字在123时获得flag</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517085905031.png" alt="image-20250517085905031"></p>
+<p><code>palu&#123;e60ed7efcfe648b09439e4334b319e6e&#125;</code></p>
+<h2 id="ezblog-复现"><a href="#ezblog-复现" class="headerlink" title="ezblog(复现)"></a>ezblog(复现)</h2><p>反编译<code>dashboard.class</code>获得如下源码，但是不知道怎么找<code>realkey</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.Controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.noear.solon.annotation.Controller;</span><br><span class="line"><span class="keyword">import</span> org.noear.solon.annotation.Mapping;</span><br><span class="line"><span class="keyword">import</span> org.noear.solon.annotation.Param;</span><br><span class="line"><span class="keyword">import</span> org.noear.solon.core.handle.ModelAndView;</span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="comment">/* loaded from: dashboard.class */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">dashboard</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">realkey</span> <span class="operator">=</span> <span class="string">&quot;********&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping(&quot;/&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ModelAndView</span> <span class="variable">vm</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ModelAndView</span>(<span class="string">&quot;index.ftl&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> vm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping(&quot;/dashboard&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">dashboard</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ModelAndView</span> <span class="variable">vm</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ModelAndView</span>(<span class="string">&quot;dashboard.ftl&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> vm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping(&quot;/backdoor&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">backdoor</span><span class="params">(<span class="meta">@Param(&quot;key&quot;)</span> String key)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (realkey.equals(key)) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">flag</span> <span class="operator">=</span> System.getenv(<span class="string">&quot;FLAG&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;flag is &quot;</span> + flag;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;you are god&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>看了wp才知道存在任意文件读取，访问<code>/assets/../../app/app.jar</code>就可下载源码，从而获得key</p>
+<h1 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h1><h2 id="PositionalXOR"><a href="#PositionalXOR" class="headerlink" title="PositionalXOR"></a>PositionalXOR</h2><p><strong>1.</strong> 异或逻辑：</p>
+<p>每个字符的加密方式是：密文字符 &#x3D; 原文字符 ^ (位置 + 1)（位置从 0 开始计数，但密钥从 1 开始递增）。</p>
+<p>例如，第一个字符 q 的 ASCII 码为 113，位置为 0，密钥为 1，解密为 113 ^ 1 &#x3D; 112，对应字符 p。</p>
+<p><strong>2.</strong> 逐字符解密：</p>
+<p>对每个字符按位置依次异或，恢复原始字符。</p>
+<p>例如：</p>
+<p>V（位置 5）异或 6 得到 P。</p>
+<p>h（位置 6）异或 7 得到 o。</p>
+<p>{（位置 7）异或 8 得到 s。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">encrypted = &quot;qcoq~Vh&#123;e~bccocH^@Lgt&#123;gt|g&quot;</span><br><span class="line">decrypted = &quot;&quot;.join([chr(ord(c) ^ (i+1)) for i, c in enumerate(encrypted)])</span><br><span class="line">print(f&quot;Flag: &#123;decrypted&#125;&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518230719713.png" alt="image-20250518230719713"></p>
+<p><code>palu&#123;PosltionalXOR_sample&#125;</code></p>
+<h2 id="PaluFlat"><a href="#PaluFlat" class="headerlink" title="PaluFlat"></a>PaluFlat</h2><p>附件为.com文件，改为.zip解压后得到exe文件，</p>
+<p>exe文件丢入ida找到加密逻辑</p>
+<p>输入存入str[]数组中经过sub_40155函数加密后与v5数组比较</p>
+<p>sub_40155加密逻辑：</p>
+<p>加密流程按以下顺序进行：<br>​<br>动态密钥选择：根据字符索引奇偶性交替使用”flat”和”palu”两个密钥<br>异或混淆：用密钥字节对原始字节进行异或运算<br>位移混淆：循环右移4位打乱bit位置<br>数值变换：通过减85改变数值分布<br>取反混淆：最终通过按位取反实现非线性变换<br>各步骤说明：<br>​<br>密钥选择策略：奇数位用flat[0]，偶数位用palu[0]，通过模运算循环使用密钥字符<br>循环移位实现：(v8 &gt;&gt; 4) | (v8 &lt;&lt; 4) 完成4位右循环<br>减法操作使用模运算处理溢出，保证结果在0-255范围内<br>最终取反操作：~v8 &amp; 0xFF 确保结果为有效字节值<br>这个加密算法通过多阶段非线性变换，实现了对原始字符串的混淆和扩散效果。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt_byte</span>(<span class="params">encrypted_byte, key_part, index, key1_len, key2_len</span>):</span><br><span class="line">  <span class="comment"># 逆向操作步骤：取反 → 加85 → 循环移位 → 异或</span></span><br><span class="line">  v8 = ~encrypted_byte &amp; <span class="number">0xFF</span>  <span class="comment"># 逆向取反操作</span></span><br><span class="line">  v8 = (v8 + <span class="number">85</span>) % <span class="number">256</span>     <span class="comment"># 逆向减85操作</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 循环右移4位的逆向操作（同样是循环右移4位，因为两次移位等于原值）</span></span><br><span class="line">  v8 = ((v8 &lt;&lt; <span class="number">4</span>) | (v8 &gt;&gt; <span class="number">4</span>)) &amp; <span class="number">0xFF</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 选择密钥（与加密时相同的逻辑）</span></span><br><span class="line">  <span class="keyword">if</span> index % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">    key = key_part[<span class="number">0</span>]</span><br><span class="line">    key_len = key1_len</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    key = key_part[<span class="number">1</span>]</span><br><span class="line">    key_len = key2_len</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 逆向异或操作</span></span><br><span class="line">  v8 ^= key[index % key_len]</span><br><span class="line">  <span class="keyword">return</span> v8</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt_string</span>(<span class="params">encrypted_str</span>):</span><br><span class="line">  key_part = [<span class="string">b&quot;flat&quot;</span>, <span class="string">b&quot;palu&quot;</span>]</span><br><span class="line">  key1_len = <span class="built_in">len</span>(key_part[<span class="number">0</span>])</span><br><span class="line">  key2_len = <span class="built_in">len</span>(key_part[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">  decrypted = <span class="built_in">bytearray</span>()</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(encrypted_str)):</span><br><span class="line">    plain_byte = decrypt_byte(encrypted_str[i], key_part, i, key1_len, key2_len)</span><br><span class="line">    decrypted.append(plain_byte)</span><br><span class="line">  <span class="keyword">return</span> decrypted.decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment"># 修正后的加密数据（包含原C代码中的0x8F）</span></span><br><span class="line">encrypted_str = [</span><br><span class="line">  <span class="number">0x54</span>, <span class="number">0x84</span>, <span class="number">0x54</span>, <span class="number">0x44</span>, <span class="number">0xA4</span>, <span class="number">0xB2</span>, <span class="number">0x84</span>, <span class="number">0x54</span>,</span><br><span class="line">  <span class="number">0x62</span>, <span class="number">0x32</span>, <span class="number">0x8F</span>, <span class="number">0x54</span>, <span class="number">0x62</span>, <span class="number">0xB2</span>, <span class="number">0x54</span>, <span class="number">0x03</span>,</span><br><span class="line">  <span class="number">0x14</span>, <span class="number">0x80</span>, <span class="number">0x43</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密并打印结果</span></span><br><span class="line">decrypted_flag = decrypt_string(encrypted_str)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Decrypted Flag:&quot;</span>, decrypted_flag)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518230836196.png" alt="image-20250518230836196"></p>
+<p><code>palu&#123;Fat_N0t_Flat!&#125;</code></p>
+<h1 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h1><h2 id="循环锁链"><a href="#循环锁链" class="headerlink" title="循环锁链"></a>循环锁链</h2><p><strong>1.</strong> 确定起点：已知flag以palu{开头，对应的ASCII值分别为0x70, 0x61, 0x6C, 0x75, 0x7B。</p>
+<p><strong>2.</strong> 异或链推导：发现密文循环结构中，若以索引36（最后一个字节0x0D）为起点，并假设明文通过异或链（每个字节与前一个明文异或）生成，则：</p>
+<p>明文[0] &#x3D; cipher[36] ^ IV，其中IV &#x3D; 0x0D ^ 0x70 &#x3D; 0x7D。</p>
+<p>后续明文满足：明文[i] &#x3D; cipher[i] ^ 明文[i-1]。</p>
+<p><strong>3.</strong> 逐字节解密：从索引36开始循环遍历密文，依次异或前一个明文字节，得到完整明文。</p>
+<p>最终解密结果即为所求flag。</p>
+<p><code>palu&#123;iC7uDoJJMAWnIhkkCNiIoCZZVmiPrk9&#125;</code></p>
+<h2 id="欧几里得"><a href="#欧几里得" class="headerlink" title="欧几里得"></a>欧几里得</h2><p>Paillier加密</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"></span><br><span class="line"><span class="comment"># 已知的密文</span></span><br><span class="line">c = <span class="number">1426774899479339414711783875769670405758108494041927642533743607154735397076811133205075799614352194241060726689487117802867974494099614371033282640015883625484033889861</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历所有可能的两个字节值（0x0000 到 0xFFFF）</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0x10000</span>):</span><br><span class="line">    <span class="comment"># 构造两个字节</span></span><br><span class="line">    high = s &gt;&gt; <span class="number">8</span>  <span class="comment"># 高字节</span></span><br><span class="line">    low = s &amp; <span class="number">0xff</span>  <span class="comment"># 低字节</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成m2的字节串：两个字节重复35次，共70字节</span></span><br><span class="line">    m2_bytes = <span class="built_in">bytes</span>([high, low]) * <span class="number">35</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将字节串转换为整数</span></span><br><span class="line">    m2 = <span class="built_in">int</span>.from_bytes(m2_bytes, <span class="string">&#x27;big&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果m2大于密文c，则跳过</span></span><br><span class="line">    <span class="keyword">if</span> m2 &gt; c:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算m1的候选值</span></span><br><span class="line">    m1 = c - m2</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将m1转换为字节</span></span><br><span class="line">    m1_bytes = long_to_bytes(m1)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 检查是否以&#x27;palu&#123;&#x27;开头，并且所有字符可打印</span></span><br><span class="line">    <span class="keyword">if</span> m1_bytes.startswith(<span class="string">b&#x27;palu&#123;&#x27;</span>) <span class="keyword">and</span> m1_bytes.endswith(<span class="string">b&#x27;&#125;&#x27;</span>) <span class="keyword">and</span> <span class="built_in">all</span>(<span class="number">32</span> &lt;= b &lt;= <span class="number">126</span> <span class="keyword">for</span> b <span class="keyword">in</span> m1_bytes):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Found flag:&quot;</span>, m1_bytes.decode())</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Seed:&quot;</span>, <span class="built_in">hex</span>(s))</span><br><span class="line">        exit()</span><br></pre></td></tr></table></figure>
+
+<p><code>palu&#123;48b635a7a2474ef743e333478b67a2f5&#125;</code></p>
+<h2 id="RSA-Quartic-Quandary"><a href="#RSA-Quartic-Quandary" class="headerlink" title="RSA_Quartic_Quandary"></a>RSA_Quartic_Quandary</h2><p>脚本跑</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes, bytes_to_long</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> isqrt</span><br><span class="line"></span><br><span class="line">n = <span class="number">125997816345753096048865891139073286898143461169514858050232837657906289840897974068391106608902082960171083817785532702158298589600947834699494234633846206712414663927142998976208173208829799860130354978308649020815886262453865196867390105038666506017720712272359417586671917060323891124382072599746305448903</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = <span class="number">16076213508704830809521504161524867240789661063230251272973700316524961511842110066547743812160813341691286895800830395413052502516451815705610447484880112548934311914559776633140762863945819054432492392315491109745915225117227073045171062365772401296382778452901831550773993089344837645958797206220200272941</span></span><br><span class="line">s = <span class="number">35935569267272146368441512592153486419244649035623643902985220815940198358146024590300394059909370115858091217597774010493938674472746828352595432824315405933241792789402041405932624651226442192749572918686958461029988244396875361295785103356745756304497466567342796329331150560777052588294638069488836419744297241409127729615544668547101580333420563318486256358906310909703237944327684178950282413703357020770127158209107658407007489563388980582632159120621869165333921661377997970334407786581024278698231418756106787058054355713472306409772260619117725561889350862414726861327985706773512963177174611689685575805282</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 1: Calculate u = sqrt(s + 2n^2)</span></span><br><span class="line">n_squared = n * n</span><br><span class="line">s_plus_2n2 = s + <span class="number">2</span> * n_squared</span><br><span class="line">u = isqrt(s_plus_2n2)</span><br><span class="line"><span class="keyword">assert</span> u * u == s_plus_2n2  <span class="comment"># Verify perfect square</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 2: Calculate t = p + q</span></span><br><span class="line">t_squared = u + <span class="number">2</span> * n</span><br><span class="line">t = isqrt(t_squared)</span><br><span class="line"><span class="keyword">assert</span> t * t == t_squared  <span class="comment"># Verify perfect square</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 3: Solve quadratic equation x^2 - tx + n = 0</span></span><br><span class="line">delta = t * t - <span class="number">4</span> * n</span><br><span class="line">d = isqrt(delta)</span><br><span class="line"><span class="keyword">assert</span> d * d == delta  <span class="comment"># Verify perfect square</span></span><br><span class="line"></span><br><span class="line">p = (t + d) // <span class="number">2</span></span><br><span class="line">q = (t - d) // <span class="number">2</span></span><br><span class="line"><span class="keyword">assert</span> p * q == n  <span class="comment"># Verify p, q correct</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 4: Calculate phi(n) and d</span></span><br><span class="line">phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">d = <span class="built_in">pow</span>(e, -<span class="number">1</span>, phi)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 5: Decrypt</span></span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line">flag = long_to_bytes(m)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Flag: <span class="subst">&#123;flag.decode()&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Verify</span></span><br><span class="line">m_check = bytes_to_long(flag)</span><br><span class="line">c_check = <span class="built_in">pow</span>(m_check, e, n)</span><br><span class="line"><span class="keyword">assert</span> c_check == c</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250519092056980.png" alt="image-20250519092056980"></p>
+<p><code>palu&#123;This_is_a_fake_flag_change_it_for_real_use&#125;</code></p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="screenshot"><a href="#screenshot" class="headerlink" title="screenshot"></a>screenshot</h2><p>丢工具就能看到flag</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps1.jpg" alt="img"></p>
+<h2 id="时间折叠（TimeFold-Paradox）"><a href="#时间折叠（TimeFold-Paradox）" class="headerlink" title="时间折叠（TimeFold Paradox）"></a>时间折叠（TimeFold Paradox）</h2><p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps2.jpg" alt="img"> </p>
+<p>先将数字后面的16进制提取出来</p>
+<p>然后将每个16进制与0x8e进行异或</p>
+<p>得到flag</p>
+<p><code>palu&#123;This_is_A_Sample_Flag_Change_Me!!&#125;</code> </p>
+<h1 id="应急响应"><a href="#应急响应" class="headerlink" title="应急响应"></a>应急响应</h1><p>应急响应环境解压密码<br>网络拓扑环境<br><code>Skills@@@Skills@@@Skills</code><br>畸行的爱<br><code>Parloo&amp;zgsfsys&amp;onefox&amp;solar**juyt</code></p>
+<h2 id="1-1"><a href="#1-1" class="headerlink" title="1-1"></a>1-1</h2><p>在网站目录下看到一个a.php</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps3.jpg" alt="img"> </p>
+<p>发现是一个马子</p>
+<p>于是就去找网站日志里面谁传的a.php</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps4.jpg" alt="img"> </p>
+<p>找到这个ip,192.168.31.240</p>
+<p><code>palu&#123;192.168.31.240&#125;</code></p>
+<h2 id="1-2"><a href="#1-2" class="headerlink" title="1-2"></a>1-2</h2><p>由于我们还看到了一个shell.php，于是找到shell.php的目录，看到一个日志文件，clean_jpg.log</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps5.jpg" alt="img"> </p>
+<p>我们打开之后看到里面有攻击ip，192.168.31.11</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps6.jpg" alt="img"> </p>
+<p><code>palu&#123;192.168.31.11&#125;</code></p>
+<h2 id="1-4"><a href="#1-4" class="headerlink" title="1-4"></a>1-4</h2><p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps7.jpg" alt="img"> </p>
+<p>火眼直接搜</p>
+<p><code>palu&#123;pc3_zgsfqwerlkssaw&#125;</code></p>
+<h2 id="1-5"><a href="#1-5" class="headerlink" title="1-5"></a>1-5</h2><p>将win10的a.bat打开</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps8.jpg" alt="img"> </p>
+<p><code>palu&#123;nizhidaowoyouduoainima&#125;</code></p>
+<h2 id="1-6"><a href="#1-6" class="headerlink" title="1-6"></a>1-6</h2><p>我们从网站得到的数据库密码之后</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps9.jpg" alt="img"> </p>
+<p>进入数据库</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps10.jpg" alt="img"> </p>
+<p>查到订单号</p>
+<p>然后去网站输入订单号得到flag</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps11.jpg" alt="img"> </p>
+<p><code>palu&#123;sqlaabbccsbwindows&#125;</code></p>
+<h2 id="1-7"><a href="#1-7" class="headerlink" title="1-7"></a>1-7</h2><p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps12.jpg" alt="img"> </p>
+<p>要找钓鱼文件hash</p>
+<p>我在win10的回收站里面看到了简历.exe文件，还原之后被杀软杀了，然后丢云沙箱，看这个名字都是钓鱼文件</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps13.jpg" alt="img"> </p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps14.jpg" alt="img"> </p>
+<p><code>palu&#123;2977CDAB8F3EE5EFDDAE61AD9F6CF203&#125;</code></p>
+<h2 id="1-8"><a href="#1-8" class="headerlink" title="1-8"></a>1-8</h2><p>从日志中看出攻击者还传入了一个shell.php文件</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps15.jpg" alt="img"> </p>
+<p>hack这个就是第一个webshell的密码</p>
+<p><code>palu&#123;hack&#125;</code></p>
+<h2 id="1-10"><a href="#1-10" class="headerlink" title="1-10"></a>1-10</h2><p>在webserver机器里面有攻击者穿的a.php，里面有</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps16.jpg" alt="img"> </p>
+<p>所以连接密码是00232</p>
+<p><code>palu&#123;00232&#125;</code></p>
+<h2 id="1-11"><a href="#1-11" class="headerlink" title="1-11"></a>1-11</h2><p>有一个影子用户，火眼直接识别</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/wps17.jpg" alt="img">  </p>
+<p><code>palu&#123;wmx_love&#125;</code></p>
+<h2 id="2-1"><a href="#2-1" class="headerlink" title="2-1"></a>2-1</h2><p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517153152229.png" alt="image-20250517153152229"></p>
+<p><code>palu&#123;2025_qiandao_flag&#125;</code></p>
+<h2 id="2-2"><a href="#2-2" class="headerlink" title="2-2"></a>2-2</h2><p>通过火眼分析获得flag，<del>自己找了老半天没找到flag</del></p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/9d54303f0004b2467b88751b38c29468.png" alt="9d54303f0004b2467b88751b38c29468"></p>
+<p><code>palu&#123;2025_waf&#125;</code></p>
+<hr>
+<p>看wp发现grep命令可以出来，直接<code>grep -r &quot;palu&#123;&quot; /*</code>就行，这个命令是匹配文件内容，我之前的<code>find / -name &quot;palu&#123;&quot;</code>是匹配文件目录及名字</p>
+<h2 id="2-3"><a href="#2-3" class="headerlink" title="2-3"></a>2-3</h2><p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517113158872.png" alt="image-20250517113158872"></p>
+<p><code>palu&#123;Mysql_@2025&#125;</code> </p>
+<h2 id="2-4"><a href="#2-4" class="headerlink" title="2-4"></a>2-4</h2><p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517140810328.png" alt="image-20250517140810328"></p>
+<p><code>palu&#123;192.168.20.107&#125;</code></p>
+<h2 id="2-5"><a href="#2-5" class="headerlink" title="2-5"></a>2-5</h2><p>看<code>waf</code>日志进行分析</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518224911450.png" alt="image-20250518224911450"></p>
+<p><code>palu&#123;2025-05-05-00:04:40&#125;</code></p>
+<h2 id="2-6"><a href="#2-6" class="headerlink" title="2-6"></a>2-6</h2><p>在防火墙监控中找到关键文件</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517172238100.png" alt="image-20250517172238100"></p>
+<p><code>palu&#123;key.txt&#125;</code></p>
+<h2 id="2-7"><a href="#2-7" class="headerlink" title="2-7"></a>2-7</h2><p>在key.txt中找到泄露邮箱</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517172442241.png" alt="image-20250517172442241"></p>
+<p><code>palu&#123;parloo@parloo.com&#125;</code></p>
+<h2 id="2-8"><a href="#2-8" class="headerlink" title="2-8"></a>2-8</h2><p>通过waf的ip攻击分类，找到立足的服务器为ssh服务器即<code>192.168.20.108</code></p>
+<p><code>palu&#123;192.168.20.108&#125;</code></p>
+<h2 id="2-9"><a href="#2-9" class="headerlink" title="2-9"></a>2-9</h2><p>提权的用户就是为后门用户<code>parloo</code>，访问<code>/etc/shadow</code>得到密码加盐值<code>parloo:$y$j9T$bLw/vAsrL.71gbi6NQPhI/$lpN9vHI0MYS/YL19ERrpaRpdrC37f5ya520xeG9BGiC:20212:0:99999:7:::</code></p>
+<p><code>john</code>爆破得到密码为parloo</p>
+<p><code>palu&#123;parloo/parloo&#125;</code></p>
+<h2 id="2-10"><a href="#2-10" class="headerlink" title="2-10"></a>2-10</h2><p>在<code>ssh</code>服务器上找到<code>parloo</code>账户下文件</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517174736962.png" alt="image-20250517174736962"></p>
+<p><code>palu&#123;hi_2025_parloo_is_hack&#125;</code></p>
+<h2 id="2-14"><a href="#2-14" class="headerlink" title="2-14"></a>2-14</h2><p>通过waf中看到信息泄露在8081端口</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517235811120.png" alt="image-20250517235811120"></p>
+<p><code>palu&#123;8081&#125;</code></p>
+<h2 id="2-15"><a href="#2-15" class="headerlink" title="2-15"></a>2-15</h2><p>访问server服务器<code>http://192.168.20.103:8081/</code>找到员工信息</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517135558463.png" alt="image-20250517135558463"></p>
+<p><code>palu&#123;310105198512123456&#125;</code></p>
+<h2 id="2-17"><a href="#2-17" class="headerlink" title="2-17"></a>2-17</h2><p>在近源机中找到疑似恶意文件<code>svhost.exe.exe</code>，尝试提交后正确</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518112853196.png" alt="image-20250518112853196"></p>
+<p><code>palu&#123;0f80a82621b8c4c3303d198d13776b34&#125;</code></p>
+<h2 id="2-18"><a href="#2-18" class="headerlink" title="2-18"></a>2-18</h2><p><code>palu03</code>找到账户<code>heike</code>，提交MD5值</p>
+<p><code>palu&#123;d78b6f30225cdc811adfe8d4e7c9fd34&#125;</code></p>
+<h2 id="2-19"><a href="#2-19" class="headerlink" title="2-19"></a>2-19</h2><p>内网通中群聊的聊天记录</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517123117051.png" alt="image-20250517123117051"></p>
+<p><code>palu&#123;nbq_nbq_parloo&#125;</code></p>
+<h2 id="2-20"><a href="#2-20" class="headerlink" title="2-20"></a>2-20</h2><p>审日志发现flag</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518195739889.png" alt="image-20250518195739889"></p>
+<p><code>palu&#123;Server_Parloo_2025&#125;</code></p>
+<h2 id="2-21"><a href="#2-21" class="headerlink" title="2-21"></a>2-21</h2><p>在<code>http://192.168.20.102:8081/admin/parloo</code>看日志<code>command.log</code>找到首次攻击时间</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518155033884.png" alt="image-20250518155033884"></p>
+<p><code>palu&#123;2025-05-04:15:30:38&#125;</code></p>
+<h2 id="2-22"><a href="#2-22" class="headerlink" title="2-22"></a>2-22</h2><p>审日志发现攻击者ip和端口</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518195838290.png" alt="image-20250518195838290"></p>
+<p><code>palu&#123;10.12.12.13:9999&#125;</code></p>
+<h2 id="2-27"><a href="#2-27" class="headerlink" title="2-27"></a>2-27</h2><p>waf筛选反序列化的</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517140224618.png" alt="image-20250517140224618"></p>
+<p><code>palu&#123;9999&#125;</code></p>
+<h2 id="2-30"><a href="#2-30" class="headerlink" title="2-30"></a>2-30</h2><p>用户名为<code>parloohack</code></p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250517152318578.png" alt="image-20250517152318578"></p>
+<p>密码加盐了，但是经过尝试和猜测发现密码为123456时可以登录</p>
+<p><code>palu&#123;parloohack/123456&#125;</code></p>
+<h2 id="2-36"><a href="#2-36" class="headerlink" title="2-36"></a>2-36</h2><p>访问<code>palu01</code>，发现有99个用户</p>
+<p><code>palu&#123;99&#125;</code></p>
+<h2 id="2-38"><a href="#2-38" class="headerlink" title="2-38"></a>2-38</h2><p>在<code>gitea</code>的数据库中找到密码，即为攻击者留下的信息</p>
+<p><code>palu&#123;crP1ZIVfqrkfdhGy&#125;</code></p>
+<h2 id="2-44"><a href="#2-44" class="headerlink" title="2-44"></a>2-44</h2><p>看第二个的聊天记录发现被钓鱼了，即为该用户</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518225359051.png" alt="image-20250518225359051"></p>
+<p><code>palu&#123;Parloo-子怡&#125;</code></p>
+<h2 id="2-45"><a href="#2-45" class="headerlink" title="2-45"></a>2-45</h2><p>文件路径同上</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518225448953.png" alt="image-20250518225448953"></p>
+<p><code>palu&#123;C:\Users\Public\Nwt\cache\recv\Parloo-沉沉&#125;</code></p>
+<h2 id="2-46"><a href="#2-46" class="headerlink" title="2-46"></a>2-46</h2><p>看ssh服务器上的网络外联情况</p>
+<p><img src="/img/loading.gif" data-original="/../img/%E5%8D%9A%E5%AE%A2/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/image-20250518174552979.png" alt="image-20250518174552979"></p>
+<p><code>palu&#123;47.101.213.153:8084&#125;</code></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://yxing-1.github.io">yxing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://yxing-1.github.io/2025/05/17/%E5%B8%95%E9%B2%81%E6%9D%AF-WP/">http://yxing-1.github.io/2025/05/17/帕鲁杯-WP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://yxing-1.github.io" target="_blank">Yxing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%AF%94%E8%B5%9B/">比赛</a></div><div class="post-share"><div class="social-share" data-image="/img/fafa.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/05/15/CTBUCTF-WP/" title="CTBUCTF-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">CTBUCTF-WP</div></div><div class="info-2"><div class="info-item-1">WEBWelcome ！！ ctbuctf&#123;we1c0me_t0_CT9UC7F2025&#125; Sql_No_map…?原先还在自己测，结果发现目录有东西…… //index.php&lt;?phprequire &#x27;lib.php&#x27;;header(&quot;Content-Type: text/html; charset=utf-8&quot;);$err = &#x27;&#x27;;$selected_id = $_GET[&#x27;id&#x27;] ?? &#x27;&#x27;;$selected_article = null;// 获取文章列表$list_sql = &quot;SELECT id, title FROM article ORDER BY id ASC&quot;; //升序排列$list_res = db()-&gt;query($list_sql);$articles = [];while ($row = $list_res-&gt;fetch_assoc()) &#123;    $articles[]...</div></div></div></a><a class="pagination-related" href="/2025/05/20/%E8%BD%A9%E8%BE%95%E6%9D%AF-WP/" title="轩辕杯-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">轩辕杯-WP</div></div><div class="info-2"><div class="info-item-1">WEBezjs import requestsurl=&quot;http://27.25.151.26:53243/getflag.php&quot;payload=&quot;score=100000000000&quot;headers=&#123;&#x27;Content-Type&#x27;:...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/05/10/2025ISCC-WP/" title="2025ISCC-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-10</div><div class="info-item-2">2025ISCC-WP</div></div><div class="info-2"><div class="info-item-1">区域赛WEB哪吒的试炼提示食物，莲藕，传参为food=lotus root。发现不可用按钮，去掉disable获得源码  &lt;?phpif (isset($_POST[&#x27;nezha&#x27;])) &#123;    $nezha = json_decode($_POST[&#x27;nezha&#x27;]);    $seal_incantation = $nezha-&gt;incantation;      $md5 = $nezha-&gt;md5;      $secret_power = $nezha-&gt;power;    $true_incantation = &quot;I_am_the_spirit_of_fire&quot;;      $final_incantation = preg_replace(        &quot;/&quot; . preg_quote($true_incantation, &#x27;/&#x27;) . &quot;/&quot;, &#x27;&#x27;,       ...</div></div></div></a><a class="pagination-related" href="/2025/03/22/2025polarctf%E6%98%A5%E5%AD%A3%E4%B8%AA%E4%BA%BA%E8%B5%9B-wp/" title="2025polarctf春季个人赛-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-22</div><div class="info-item-2">2025polarctf春季个人赛-WP</div></div><div class="info-2"><div class="info-item-1">CRYPTObeginnerfrom Crypto.Util.number import long_to_bytes# 给定的结尾数值suffix = 16732186163543403522711798960598469149029861032300263763941636254755451456334507142958574415880945599253440468447483752611840# 验证suffix是否是2^125的倍数bits_125 = 1 &lt;&lt; 125if suffix % bits_125 != 0:    raise ValueError(&quot;Suffix is not divisible by 2^125, no solution exists.&quot;)# 计算S&#x27; = suffix / 2^125s_prime = suffix // bits_125# 计算模数5^125mod_5_125 = 5 ** 125# 计算2^9875在模5^125下的逆元inv_2_9875 = pow(2, -9875,...</div></div></div></a><a class="pagination-related" href="/2025/01/13/2019%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-WP/" title="2019极客大挑战-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-13</div><div class="info-item-2">2019极客大挑战-WP</div></div><div class="info-2"><div class="info-item-1">[极客大挑战 2019]EasySQL 直接万能密码闭合后登录即获得flag 闭合后语句username=1&amp;password=&#x27;1&#x27; or 1=1#&#x27;  [极客大挑战 2019]LoveSQL使用万能密码尝试 username=1&amp;password=1&#x27; or 1=1#   有回显位置了，且题目提示flag放在了其他位置，下述payload的password均为上图数据 username=admin&#x27; order by 3# order by判断列数，列数为4时报错username=a&#x27; union select 1,2,3#用不存在的username才能找到回显位，不然使用admin只会重复上图，回显位为2，3username=a&#x27; union select 1,(database()),3#库名为geekusername=a&#x27; union select 1,(select group_concat(table_name) from...</div></div></div></a><a class="pagination-related" href="/2025/01/23/BaseCTF2024%E6%96%B0%E7%94%9F%E8%B5%9B/" title="2024BaseCTF-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-23</div><div class="info-item-2">2024BaseCTF-WP</div></div><div class="info-2"><div class="info-item-1">HTTP 是什么呀常规的GET，POST传参，改cookie,referer,UA,IP，注意这里如果是GET传参要传入%00，就要先url编码一次，即传入%2500，因为浏览器会自动进行一次url解码 GET /?basectf=we1c%2500me POST Base=fl@gCookie: c00k13=i can&#x27;t eat itUser-Agent: BaseReferer: BaseX-Forwarded-For:127.0.0.1   base64解码即可 喵喵喵´•ﻌ•&#96;直接GET传参 DT=system(&#x27;ls /&#x27;);DT=system(&#x27;cat /flag&#x27;);  md5绕过欸直接数组绕过即可，注意第二层为强比较，也可用数组绕过 GET:name[]=1&amp;name2[]=2Post:password[]=3&amp;password2[]=4   A Dark Room源码  upload写个一句话木马存为1.php上传，bp抓包修改文件类型为Content-Type:...</div></div></div></a><a class="pagination-related" href="/2025/04/26/ACTF-WP/" title="ACTF-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-26</div><div class="info-item-2">ACTF-WP</div></div><div class="info-2"><div class="info-item-1"> WEBnot so web 1题目先随便注册登录进入后base64解码得到源码 import base64, json, timeimport os, sys, binasciifrom dataclasses import dataclass, asdictfrom typing import Dict, Tuplefrom secret import KEY, ADMIN_PASSWORDfrom Crypto.Cipher import AESfrom Crypto.Util.Padding import pad, unpadfrom flask import (    Flask,    render_template,    render_template_string,    request,    redirect,    url_for,    flash,    session,)app = Flask(__name__)app.secret_key = KEY@dataclass(kw_only=True)class APPUser:    name:...</div></div></div></a><a class="pagination-related" href="/2025/02/03/HGAME-WP/" title="HGAME-WP"><img class="cover" src="/img/loading.gif" data-original="/img/fafa.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-03</div><div class="info-item-2">HGAME-WP</div></div><div class="info-2"><div class="info-item-1">WEBPacman直接在源码中找通关逻辑，在index.js中就可以找到，但是有两个，之前找错了，一直交没对  拿出来base64＋栅栏2栏就行  MysteryMessageBoard通过弱口令爆破登录shallot用户，密码888888，然后插入xss的payload后访问&#x2F;admin &lt;script&gt;var xhr=new XMLHttpRequest();xhr.open(&quot;POST&quot;, &quot;http://127.0.0.1:8888/&quot;, true);xhr.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;);xhr.send(&quot;comment=&quot; +...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB"><span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CatBank"><span class="toc-text">CatBank</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CatNet"><span class="toc-text">CatNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezblog-%E5%A4%8D%E7%8E%B0"><span class="toc-text">ezblog(复现)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Re"><span class="toc-text">Re</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PositionalXOR"><span class="toc-text">PositionalXOR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PaluFlat"><span class="toc-text">PaluFlat</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CRYPTO"><span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%94%81%E9%93%BE"><span class="toc-text">循环锁链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97"><span class="toc-text">欧几里得</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSA-Quartic-Quandary"><span class="toc-text">RSA_Quartic_Quandary</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MISC"><span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#screenshot"><span class="toc-text">screenshot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%8A%98%E5%8F%A0%EF%BC%88TimeFold-Paradox%EF%BC%89"><span class="toc-text">时间折叠（TimeFold Paradox）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94"><span class="toc-text">应急响应</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1"><span class="toc-text">1-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2"><span class="toc-text">1-2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4"><span class="toc-text">1-4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5"><span class="toc-text">1-5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6"><span class="toc-text">1-6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7"><span class="toc-text">1-7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8"><span class="toc-text">1-8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-10"><span class="toc-text">1-10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-11"><span class="toc-text">1-11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1"><span class="toc-text">2-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2"><span class="toc-text">2-2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3"><span class="toc-text">2-3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4"><span class="toc-text">2-4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5"><span class="toc-text">2-5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6"><span class="toc-text">2-6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7"><span class="toc-text">2-7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-8"><span class="toc-text">2-8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-9"><span class="toc-text">2-9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-10"><span class="toc-text">2-10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-14"><span class="toc-text">2-14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-15"><span class="toc-text">2-15</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-17"><span class="toc-text">2-17</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-18"><span class="toc-text">2-18</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-19"><span class="toc-text">2-19</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-20"><span class="toc-text">2-20</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-21"><span class="toc-text">2-21</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-22"><span class="toc-text">2-22</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-27"><span class="toc-text">2-27</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-30"><span class="toc-text">2-30</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-36"><span class="toc-text">2-36</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-38"><span class="toc-text">2-38</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-44"><span class="toc-text">2-44</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-45"><span class="toc-text">2-45</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-46"><span class="toc-text">2-46</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By yxing</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body></html>
